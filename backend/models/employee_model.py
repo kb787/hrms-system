@@ -26,3 +26,23 @@ class Employee(Base):
     decrement_amount = Column(BigInteger)
     pending_leaves = Column(Integer)
     leave_approve_status = Column(Boolean)
+    
+from pydantic import BaseModel
+from typing import Optional
+from datetime import date
+
+class EmployeeCreate(BaseModel):
+    first_name: str
+    last_name: str
+    age: int
+    designation: str
+    salary: float
+    joining_date: date
+    increment_amount: float
+    decrement_amount: float
+    pending_leaves: int
+    leave_approve_status: Optional[bool] = False
+
+    class Config:
+        from_attributes = True  # Replaces old `orm_mode = True`
+    

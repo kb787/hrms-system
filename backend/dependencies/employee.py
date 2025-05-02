@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.models.employee_model import Employee
-from backend.config.config import SessionLocal, engine, Base
+from models.employee_model import Employee
+from config.config import SessionLocal, engine, Base
 
 
 def get_db():
@@ -22,7 +22,7 @@ def get_all_employee(db: Session):
     return (status.HTTP_200_OK, employee_obj)
 
 
-def delete_employee(db: Session, empId: int):
+def delete_employee(empId: int,db: Session):
     target_employee = db.query(Employee).filter(Employee.employee_id == empId)
     if not target_employee:
         raise HTTPException(
@@ -55,7 +55,7 @@ def create_new_employee(db: Session, employee: Employee):
         raise HTTPException(status_code=500, detail="Error creating employee")
 
 
-def update_employee_data(db: Session, empId: int, employee: Employee):
+def update_employee_data(empId: int,employee: Employee,db: Session):
     try:
         target_employee = db.query(Employee).filter(Employee.employee_id == empId)
         if not target_employee:
@@ -82,7 +82,7 @@ def update_employee_data(db: Session, empId: int, employee: Employee):
         raise HTTPException(status_code=500, detail="Error updating employee")
 
 
-def get_single_employee(db: Session, empId: int):
+def get_single_employee(empId: int,db: Session):
     target_employee = db.query(Employee).filter(Employee.employee_id == empId)
     if not target_employee:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)

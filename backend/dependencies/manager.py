@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from backend.models.employee_model import Employee
-from backend.config.config import SessionLocal , engine, Base
-from backend.models.manager_model import Manager
+from models.employee_model import Employee
+from config.config import SessionLocal , engine, Base
+from models.manager_model import Manager
 
 def get_db():
     db = SessionLocal()
