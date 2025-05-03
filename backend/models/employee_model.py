@@ -32,7 +32,7 @@ from typing import Optional
 from datetime import date
 
 class EmployeeCreate(BaseModel):
-    employee_id = Column(Integer, primary_key=True, index=True)
+    employee_id :int
     first_name: str
     last_name: str
     age: int
